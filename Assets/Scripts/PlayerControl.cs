@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject PlayerBulletGO;
+    public GameObject BulletPosition01;
+    public GameObject BulletPosition02;
+
     public float speed; 
 
     // Start is called before the first frame update
@@ -15,6 +19,15 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown("space"))
+        {
+            GameObject bullet01 = (GameObject)Instantiate(PlayerBulletGO);
+            bullet01.transform.position = BulletPosition01.transform.position;
+
+            GameObject bullet02 = (GameObject)Instantiate(PlayerBulletGO);
+            bullet02.transform.position = BulletPosition02.transform.position;
+        }
+
         float x = Input.GetAxisRaw ("Horizontal");
         float y = Input.GetAxisRaw ("Vertical");
 
