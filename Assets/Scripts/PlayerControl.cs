@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviour
 
         LivesUIText.text = lives.ToString();
 
+        transform.position = new Vector2(0, 0);
+
         gameObject.SetActive(true); 
     }
 
@@ -38,6 +40,8 @@ public class PlayerControl : MonoBehaviour
     {
         if(Input.GetKeyDown("space"))
         {
+            GetComponent<AudioSource>().Play();
+
             GameObject bullet01 = (GameObject)Instantiate(PlayerBulletGO);
             bullet01.transform.position = BulletPosition01.transform.position;
 
