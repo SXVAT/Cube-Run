@@ -1,15 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameObject GameManagerGO;
     public GameObject PlayerBulletGO;
     public GameObject BulletPosition01;
     public GameObject BulletPosition02;
     public GameObject ExplosionGO;
 
+    public Text LivesUIText;
+
+    const int MaxLives = 3;
+    int lives;
+
     public float speed; 
+
+    public void Init()
+    {
+        lives = MaxLives;
+
+        LivesUIText.text = lives.ToString();
+
+        gameObject.SetActive(true); 
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -63,7 +79,15 @@ public class PlayerControl : MonoBehaviour
         {
             PlayExplosion();
 
-            Destroy(gameObject);
+            lives--;
+            LivesUIText.text = lives.ToString();
+
+            if (lives == 0)
+            {
+                GameManagerGO.GetComponent<GameManager>().SetGameManagerState(GameManager.GameManagerState.GameOver);
+
+                gameObject.SetActive(false);
+            }
         }
     }
 
